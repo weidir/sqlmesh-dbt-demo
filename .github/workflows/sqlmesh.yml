@@ -1,0 +1,63 @@
+name: SQLMesh Bot
+run-name: 🤖 SQLMesh Bot 🤖
+on:
+  pull_request:
+    branches: [ "main" ]
+    types:
+      - synchronize
+      - opened
+    paths:
+      - dbt_src/models/**
+      - dbt_src/config.py
+      - .github/workflows/sqlmesh.yml
+  
+  # Required if using comments to issue commands to the bot
+  issue_comment:
+    types:
+    - created
+
+# The latest commit is the one that will be used to create the PR environment and deploy to production
+concurrency:
+  group: ${{ github.workflow }}-${{ github.head_ref || github.ref_name }}
+  cancel-in-progress: true
+
+# Define the jobs that will run
+jobs:
+  sqlmesh:
+    name: SQLMesh Actions Workflow
+    runs-on: ubuntu-latest
+    permissions:
+      # Required to access code in PR
+      contents: write
+      # Required to post comments
+      issues: write
+      # Required to update check runs
+      checks: write
+      # Required to merge
+      pull-requests: write
+    steps:
+      - name: GitHub Debug
+        env:
+          GITHUB_CONTEXT: ${{ toJson(github) }}
+        run: echo "$GITHUB_CONTEXT"
+      - name: Setup Python
+        uses: actions/setup-python@v4
+      - name: Checkout PR branch
+        uses: actions/checkout@v4
+        with:
+          ref: refs/pull/${{ github.event.issue.pull_request && github.event.issue.number || github.event.pull_request.number  }}/merge
+      - name: Install SQLMesh + Dependencies
+        run: |
+          python3 -m pip install pip --upgrade
+          pip install pyopenssl --upgrade
+          pip install -r requirements.txt
+        shell: bash
+      - name: Run CI/CD Bot
+        env:
+          ACCOUNT: ${{ secrets.ACCOUNT }}
+          USER: ${{ secrets.USER }}
+          PASSWORD: ${{ secrets.PASSWORD }}
+          WAREHOUSE: ${{ secrets.WAREHOUSE }}
+          SQLMESH_DEBUG: 1
+        run: |
+          sqlmesh_cicd -p ${{ github.workspace }}/dbt_src github --token ${{ secrets.GITHUB_TOKEN }} run-all
