@@ -1,0 +1,26 @@
+dbt_src:
+  outputs:
+    prod:
+      type: snowflake
+      account: "{{ env_var('ACCOUNT') }}"
+      database: PROD
+      password: "{{ env_var('PASSWORD') }}"
+      role: ACCOUNTADMIN
+      schema: PUBLIC
+      threads: 4
+      user: "{{ env_var('USER') }}"
+      warehouse: "{{ env_var('WAREHOUSE') }}"
+
+    dev:
+      type: snowflake
+      account: "{{ env_var('ACCOUNT') }}"
+      database: DEV
+      password: "{{ env_var('PASSWORD') }}"
+      role: ACCOUNTADMIN
+      schema: PUBLIC
+      threads: 1
+      user: "{{ env_var('USER') }}"
+      warehouse: "{{ env_var('WAREHOUSE') }}"  
+
+  # Change this to change the default database to write to
+  target: prod

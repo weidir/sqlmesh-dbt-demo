@@ -1,0 +1,17 @@
+FROM python:3.11-slim-buster
+
+# Install postgresql and dependencies
+RUN apt-get update \
+  && apt-get install -y postgresql postgresql-contrib libpq-dev gcc \
+  && apt-get install -y git \
+  && apt-get install -y make \
+  && apt-get install sudo \
+  && apt-get install -y curl \
+  && apt-get clean \
+  && rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/*
+
+# Add the contents of the application to the app directory of the container
+ADD . /app/sqlmesh-dbt-demo
+
+# Set the working directory to /app/sqlmesh-dbt-demo
+WORKDIR /app/sqlmesh-dbt-demo

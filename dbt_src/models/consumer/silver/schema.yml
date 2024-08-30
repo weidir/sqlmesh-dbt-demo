@@ -1,0 +1,700 @@
+
+version: 2
+
+models:
+  - name: customers_silver
+    description: "Example of a customer input master data schema"
+    columns:
+      - name: cust_id
+        description: "The primary key for this table, represents a unique customer"
+        data_tests:
+          - unique:
+              config:
+                severity: error
+                error_if: ">=100"
+                warn_if: ">=1"
+          - not_null:
+              config:
+                severity: error
+                error_if: ">=100"
+                warn_if: ">=1"
+      - name: first_name
+        description: "The first name of the customer"
+        data_tests:
+          - not_null:
+              config:
+                severity: error
+                error_if: ">=1000"
+                warn_if: ">=1"
+      - name: last_name
+        description: "The last name of the customer"
+        data_tests:
+          - not_null:
+              config:
+                severity: error
+                error_if: ">=1000"
+                warn_if: ">=1"
+      - name: email
+        description: "The email address of the customer"
+        data_tests:
+          - not_null:
+              config:
+                severity: error
+                error_if: ">=100"
+                warn_if: ">=1"
+      - name: phone
+        description: "The phone number of the customer"
+        data_tests:
+          - not_null:
+              config:
+                severity: warn
+                warn_if: ">=100"
+      - name: dob
+        description: "The date of birth of the customer"
+        data_tests:
+          - not_null:
+              config:
+                severity: warn
+                warn_if: ">=100"
+      - name: marital_status
+        description: "The marital status of the customer"
+        data_tests:
+          - not_null:
+              config:
+                severity: warn
+                warn_if: ">=1000"
+      - name: address
+        description: "The address of the customer"
+        data_tests:
+          - not_null:
+              config:
+                severity: warn
+                warn_if: ">=100"
+      - name: city
+        description: "The city of the customer"
+        data_tests:
+          - not_null:
+              config:
+                severity: warn
+                warn_if: ">=100"
+      - name: county
+        description: "The county of the customer"
+        data_tests:
+          - not_null:
+              config:
+                severity: warn
+                warn_if: ">=100"
+      - name: state_province 
+        description: "The state or province of the customer"
+        data_tests:
+          - not_null:
+              config:
+                severity: warn
+                warn_if: ">=100"
+      - name: postal_code 
+        description: "The postal code code of the customer"
+        data_tests:
+          - not_null:
+              config:
+                severity: warn
+                warn_if: ">=100"
+      - name: country 
+        description: "The country of the customer"
+        data_tests:
+          - not_null:
+              config:
+                severity: warn
+                warn_if: ">=100"
+      - name: is_active
+        description: "Flag to indicate if the record is active"
+        data_tests:
+          - accepted_values:
+              values: [0, 1]
+              config:
+                severity: warn
+                warn_if: ">=100"
+          - not_null:
+              config:
+                severity: warn
+                warn_if: ">=100"
+      - name: created_at
+        description: "The timestamp of when the record was created"
+        data_tests:
+          - not_null:
+              config:
+                severity: error
+                error_if: ">=100"
+                warn_if: ">=1"
+      - name: updated_at        
+        description: "The timestamp of when the record was last updated"
+      - name: deleted_at
+        description: "The timestamp of when the record was deleted"
+  
+  - name: products_silver
+    description: "Example of a product master data schema"
+    columns:
+      - name: product_id
+        description: "The primary key for this table, represents a unique product"
+        data_tests:
+          - unique:
+              config:
+                severity: error
+                error_if: ">=100"
+                warn_if: ">=1"
+          # - not_null:
+          #     config:
+          #       severity: error
+          #       error_if: ">=100"
+          #       warn_if: ">=1"
+      - name: product_name
+        description: "The name of the product"
+        data_tests:
+          - not_null:
+              config:
+                severity: error
+                error_if: ">=100"
+                warn_if: ">=1"
+      - name: product_description
+        description: "The description of the product"
+        data_tests:
+          - not_null:
+              config:
+                severity: error
+                error_if: ">=100"
+                warn_if: ">=1"
+      - name: product_category
+        description: "The category of the product"
+        data_tests:
+          - not_null:
+              config:
+                severity: error
+                error_if: ">=100"
+                warn_if: ">=1"
+      - name: product_subcategory
+        description: "The subcategory of the product"
+        data_tests:
+          - not_null:
+              config:
+                severity: error
+                error_if: ">=100"
+                warn_if: ">=1"
+      - name: product_price
+        description: "The price of the product"
+        data_tests:
+          - not_null:
+              config:
+                severity: error
+                error_if: ">=100"
+                warn_if: ">=1"
+      - name: product_qty
+        description: "The quantity of the product"
+        data_tests:
+          - not_null:
+              config:
+                severity: error
+                error_if: ">=100"
+                warn_if: ">=1"
+      - name: is_active
+        description: "Flag to indicate if the record is active"
+        data_tests:
+          - accepted_values:
+              values: [0, 1]
+              config:
+                severity: error
+                error_if: ">=100"
+                warn_if: ">=1"
+          # - not_null:
+          #     config:
+          #       severity: error
+          #       error_if: ">=100"
+          #       warn_if: ">=1"
+      - name: country
+        description: "The country of the product"
+        data_tests:
+          - not_null:
+              config:
+                severity: warn
+                warn_if: ">=10"
+      - name: created_at
+        description: "The timestamp of when the record was created"
+        data_tests:
+          - not_null:
+              config:
+                severity: error
+                error_if: ">=100"
+                warn_if: ">=1"
+      - name: updated_at
+        description: "The timestamp of when the record was last updated"
+      - name: deleted_at
+        description: "The timestamp of when the record was deleted"
+
+  - name: orders_silver
+    description: "Example of a orders transactional table schema"
+    columns:
+      - name: order_id
+        description: "The primary key for this table, represents a unique order"
+        data_tests:
+          - unique:
+              config:
+                severity: error
+                error_if: ">=1000"
+                warn_if: ">=1"
+          # - not_null:
+          #     config:
+          #       severity: error
+          #       error_if: ">=1000"
+          #       warn_if: ">=1"
+      - name: cust_id
+        description: "The foreign key to the customer table"
+        data_tests:
+          - not_null:
+              config:
+                severity: error
+                error_if: ">=10"
+                warn_if: ">=1"
+          # - relationships:
+          #     to: ref('customers_silver')
+          #     field: cust_id
+          #     config:
+          #       severity: error
+          #       error_if: ">=10"
+          #       warn_if: ">=1"
+      - name: product_id
+        description: "The foreign key to the product table"
+        data_tests:
+          - not_null:
+              config:
+                severity: error
+                error_if: ">=10"
+                warn_if: ">=1"
+          # - relationships:
+          #     to: ref('products_silver')
+          #     field: product_id
+          #     config:
+          #       severity: error
+          #       error_if: ">=10"
+          #       warn_if: ">=1"
+      - name: store_id
+        description: "The store id where the order was placed"
+        data_tests:
+          - relationships:
+              to: ref('stores_silver')
+              field: store_id
+              config:
+                severity: error
+                error_if: ">=10"
+                warn_if: ">=1"
+      - name: order_tmstp
+        description: "The date the order was placed"
+        data_tests:
+          - not_null:
+              config:
+                severity: error
+                error_if: ">=10"
+                warn_if: ">=1"
+      - name: order_total
+        description: "The total amount of the order"
+        data_tests:
+          - not_null:
+              config:
+                severity: error
+                error_if: ">=10"
+                warn_if: ">=1"
+      - name: order_qty
+        description: "The quantity of the order"
+        data_tests:
+          - not_null:
+              config:
+                severity: error
+                error_if: ">=10"
+                warn_if: ">=1"
+      - name: payment_method
+        description: "The payment method of the order"
+        data_tests:
+          - not_null:
+              config:
+                severity: error
+                error_if: ">=100"
+                warn_if: ">=1"
+          # - accepted_values:
+          #     values: [CREDIT_CARD, DEBIT_CARD, CASH, PAYPAL, APPLE_PAY, GOOGLE_PAY]
+          #     config:
+          #       severity: error
+          #       error_if: ">=100"
+          #       warn_if: ">=1"
+      - name: order_status
+        description: "The status of the order"
+        data_tests:
+          - not_null:
+              config:
+                severity: error
+                error_if: ">=100"
+                warn_if: ">=1"
+          - accepted_values:
+              values: [PENDING, PROCESSING, SHIPPED, DELIVERED, CANCELLED, COMPLETED, RETURNED]
+              config:
+                severity: error
+                error_if: ">=100"
+                warn_if: ">=1"
+      - name: purchase_channel
+        description: "The channel the order was purchased from"
+        data_tests:
+          - not_null:
+              config:
+                severity: error
+                error_if: ">=1000"
+                warn_if: ">=1"
+          - accepted_values:
+              values: [ONLINE, IN_STORE]
+              config:
+                severity: error
+                error_if: ">=1000"
+                warn_if: ">=1"
+      - name: campaign_id
+        description: "The campaign id associated with the order"
+        data_tests:
+          - relationships:
+              to: ref('campaigns_silver')
+              field: campaign_id
+              config:
+                severity: error
+                error_if: ">=100"
+                warn_if: ">=1"
+      - name: ship_address
+        description: "The shipping address of the order"
+        data_tests:
+          - not_null:
+              config:
+                severity: warn
+                warn_if: ">=1"
+      - name: ship_city
+        description: "The shipping city of the order"
+        data_tests:
+          - not_null:
+              config:
+                severity: warn
+                warn_if: ">=1"
+      - name: ship_state_province
+        description: "The shipping state or province of the order"
+        data_tests:
+          - not_null:
+              config:
+                severity: warn
+                warn_if: ">=1"
+      - name: ship_postal_code
+        description: "The shipping postal code of the order"
+        data_tests:
+          - not_null:
+              config:
+                severity: warn
+                warn_if: ">=1"
+      - name: ship_country
+        description: "The shipping country of the order"
+        data_tests:
+          - not_null:
+              config:
+                severity: warn
+                warn_if: ">=1"
+      - name: created_at
+        description: "The timestamp of when the record was created"
+        data_tests:
+          - not_null:
+              config:
+                severity: warn
+                warn_if: ">=1"
+      - name: updated_at
+        description: "The timestamp of when the record was last updated"
+  
+  - name: stores_silver
+    description: "Example of a store master data schema"
+    columns:
+      - name: store_id
+        description: "The primary key for this table, represents a unique store"
+        data_tests:
+          - unique:
+              config:
+                severity: error
+                error_if: ">=10"
+                warn_if: ">=1"
+          - not_null:
+              config:
+                severity: error
+                error_if: ">=10"
+                warn_if: ">=1"
+      - name: store_name
+        description: "The name of the store"
+        data_tests:
+          - not_null:
+              config:
+                severity: error
+                error_if: ">=10"
+                warn_if: ">=1"
+      - name: store_type
+        description: "The type of the store"
+        data_tests:
+          - not_null:
+              config:
+                severity: error
+                error_if: ">=10"
+                warn_if: ">=1"
+          - accepted_values:
+              values: [RETAIL, ONLINE, POP_UP, FRANCHISE]
+              config:
+                severity: error
+                error_if: ">=100"
+                warn_if: ">=1"
+      - name: address
+        description: "The address of the store"
+        data_tests:
+          - not_null:
+              config:
+                severity: error
+                error_if: ">=10"
+                warn_if: ">=1"
+      - name: city
+        description: "The city of the store"
+        data_tests:
+          - not_null:
+              config:
+                severity: error
+                error_if: ">=100"
+                warn_if: ">=1"
+      - name: state_province
+        description: "The state or province of the store"
+        data_tests:
+          - not_null:
+              config:
+                severity: error
+                error_if: ">=100"
+                warn_if: ">=1"
+      - name: postal_code
+        description: "The postal code of the store"
+        data_tests:
+          - not_null:
+              config:
+                severity: error
+                error_if: ">=100"
+                warn_if: ">=1"
+      - name: country
+        description: "The country of the store"
+        data_tests:
+          - not_null:
+              config:
+                severity: error
+                error_if: ">=100"
+                warn_if: ">=1"
+      - name: phone
+        description: "The phone number of the store"
+      - name: email
+        description: "The email address of the store"
+      - name: is_active
+        description: "Flag to indicate if the record is active"
+        data_tests:
+          - accepted_values:
+              values: [True, False]
+              config:
+                severity: error
+                error_if: ">=100"
+                warn_if: ">=1"
+          - not_null:
+              config:
+                severity: error
+                error_if: ">=100"
+                warn_if: ">=1"
+      - name: store_manager
+        description: "The name of the store manager"
+      - name: created_at
+        description: "The timestamp of when the record was created"
+        data_tests:
+          - not_null:
+              config:
+                severity: error
+                error_if: ">=100"
+                warn_if: ">=1"
+      - name: updated_at
+        description: "The timestamp of when the record was last updated"
+      - name: deleted_at
+        description: "The timestamp of when the record was deleted"
+  
+  - name: loyalty_silver
+    description: "Example of a loyalty program schema"
+    columns:
+      - name: loyalty_id
+        description: "The primary key for this table, represents a unique loyalty program"
+        data_tests:
+          - unique:
+              config:
+                severity: error
+                error_if: ">=100"
+                warn_if: ">=1"
+          - not_null:
+              config:
+                severity: error
+                error_if: ">=100"
+                warn_if: ">=1"
+      - name: cust_id
+        description: "The foreign key to the customer table"
+        data_tests:
+          - not_null:
+              config:
+                severity: error
+                error_if: ">=100"
+                warn_if: ">=1"
+          - relationships:
+              to: ref('customers_silver')
+              field: cust_id
+              config:
+                severity: error
+                error_if: ">=100"
+                warn_if: ">=1"
+      - name: program_name
+        description: "The name of the loyalty program"
+        data_tests:
+          - not_null:
+              config:
+                severity: error
+                error_if: ">=100"
+                warn_if: ">=1"
+      - name: enrollment_tmstp
+        description: "The date the customer enrolled in the loyalty program"
+        data_tests:
+          - not_null:
+              config:
+                severity: error
+                error_if: ">=100"
+                warn_if: ">=1"
+      - name: current_points_balance
+        description: "The current points balance of the customer"
+        data_tests:
+          - not_null:
+              config:
+                severity: error
+                error_if: ">=100"
+                warn_if: ">=1"
+      - name: tier_level
+        description: "The tier level of the customer"
+        data_tests:
+          - not_null:
+              config:
+                severity: error
+                error_if: ">=100"
+                warn_if: ">=1"
+          - accepted_values:
+              values: [BRONZE, SILVER, GOLD]
+              config:
+                severity: error
+                error_if: ">=100"
+                warn_if: ">=1"
+      - name: created_at
+        description: "The timestamp of when the record was created"
+        data_tests:
+          - not_null:
+              config:
+                severity: warn
+                warn_if: ">=1"
+      - name: updated_at
+        description: "The timestamp of when the record was last updated"
+      - name: deleted_at
+        description: "The timestamp of when the record was deleted"
+
+  - name: campaigns_silver
+    description: "Example of a campaign schema"
+    columns:
+      - name: campaign_id
+        description: "The primary key for this table, represents a unique campaign"
+        data_tests:
+          - unique:
+              config:
+                severity: error
+                error_if: ">=100"
+                warn_if: ">=1"
+          - not_null:
+              config:
+                severity: error
+                error_if: ">=100"
+                warn_if: ">=1"
+      - name: campaign_name
+        description: "The name of the campaign"
+        data_tests:
+          - not_null:
+              config:
+                severity: error
+                error_if: ">=100"
+                warn_if: ">=1"
+      - name: campaign_description
+        description: "The description of the campaign"
+        data_tests:
+          - not_null:
+              config:
+                severity: error
+                error_if: ">=100"
+                warn_if: ">=1"
+      - name: start_date
+        description: "The start date of the campaign"
+        data_tests:
+          - not_null:
+              config:
+                severity: error
+                error_if: ">=100"
+                warn_if: ">=1"
+      - name: end_date
+        description: "The end date of the campaign"
+        data_tests:
+          - not_null:
+              config:
+                severity: error
+                error_if: ">=100"
+                warn_if: ">=1"
+      - name: campaign_type
+        description: "The type of the campaign"
+        data_tests:
+          - not_null:
+              config:
+                severity: error
+                error_if: ">=100"
+                warn_if: ">=1"
+          - accepted_values:
+              values: [EMAIL, SMS, PUSH, IN_APP, IN_STORE]
+              config:
+                severity: error
+                error_if: ">=100"
+                warn_if: ">=1"
+      - name: channel
+        description: "The channel of the campaign"
+        data_tests:
+          - not_null:
+              config:
+                severity: error
+                error_if: ">=100"
+                warn_if: ">=1"
+          - accepted_values:
+              values: [ONLINE, IN_STORE]
+              config:
+                severity: error
+                error_if: ">=100"
+                warn_if: ">=1"
+      - name: campaign_status
+        description: "The status of the campaign"
+        data_tests:
+          - not_null:
+              config:
+                severity: error
+                error_if: ">=100"
+                warn_if: ">=1"
+          - accepted_values:
+              values: [ACTIVE, PENDING, COMPLETED]
+              config:
+                severity: error
+                error_if: ">=100"
+                warn_if: ">=1"
+      - name: created_at
+        description: "The timestamp of when the record was created"
+        data_tests:
+          - not_null:
+              config:
+                severity: warn
+                warn_if: ">=1"
+      - name: updated_at
+        description: "The timestamp of when the record was last updated"
+      - name: deleted_at
+        description: "The timestamp of when the record was deleted"

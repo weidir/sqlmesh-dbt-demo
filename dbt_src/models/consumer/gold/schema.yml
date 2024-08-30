@@ -1,0 +1,96 @@
+version: 2
+
+models:
+  - name: customer_orders_gold
+    description: "Customer orders gold data table schema"
+    columns:
+      - name: cust_id
+        description: "The primary key for this table, represents a unique customer"
+        data_tests:
+          - not_null
+          - unique
+      - name: order_count_lifetime
+        description: "The total number of orders the customer has placed"
+      - name: order_count_last_12_months
+        description: "The total number of orders the customer has placed in the last 12 months"
+      - name: order_count_last_6_months
+        description: "The total number of orders the customer has placed in the last 6 months"
+      - name: order_count_last_3_months
+        description: "The total number of orders the customer has placed in the last 3 months"
+      - name: total_order_value_lifetime
+        description: "The total value of all orders the customer has placed"
+      - name: total_order_value_last_12_months
+        description: "The total value of all orders the customer has placed in the last 12 months"
+      - name: total_order_value_last_6_months
+        description: "The total value of all orders the customer has placed in the last 6 months"
+      - name: total_order_value_last_3_months
+        description: "The total value of all orders the customer has placed in the last 3 months"
+      - name: average_order_value_lifetime
+        description: "The average value of all orders the customer has placed"
+      - name: average_order_value_last_12_months
+        description: "The average value of all orders the customer has placed in the last 12 months"
+      - name: average_order_value_last_6_months
+        description: "The average value of all orders the customer has placed in the last 6 months"
+      - name: average_order_value_last_3_months
+        description: "The average value of all orders the customer has placed in the last 3 months"
+      - name: max_order_value_lifetime
+        description: "The maximum value of an order the customer has placed"
+      - name: max_order_value_last_12_months
+        description: "The maximum value of an order the customer has placed in the last 12 months"
+      - name: max_order_value_last_6_months
+        description: "The maximum value of an order the customer has placed in the last 6 months"
+      - name: max_order_value_last_3_months
+        description: "The maximum value of an order the customer has placed in the last 3 months"
+      - name: min_order_value_lifetime
+        description: "The minimum value of an order the customer has placed"
+      - name: min_order_value_last_12_months
+        description: "The minimum value of an order the customer has placed in the last 12 months"
+      - name: min_order_value_last_6_months
+        description: "The minimum value of an order the customer has placed in the last 6 months"
+      - name: min_order_value_last_3_months
+        description: "The minimum value of an order the customer has placed in the last 3 months"
+      - name: most_common_payment_method_lifetime
+        description: "The most common payment method the customer uses"
+      - name: most_common_payment_method_last_12_months
+        description: "The most common payment method the customer uses in the last 12 months"
+
+  - name: product_orders_gold
+    description: "Product orders gold data table schema"
+    columns:
+      - name: product_id
+        description: "The primary key for this table, represents a unique product"
+        data_tests:
+          - not_null
+          - unique
+      - name: order_count_lifetime
+        description: "The total number of orders the product has been included in"
+      - name: order_count_last_12_months
+        description: "The total number of orders the product has been included in in the last 12 months"
+      - name: order_count_last_6_months
+        description: "The total number of orders the product has been included in in the last 6 months"
+      - name: order_count_last_3_months
+        description: "The total number of orders the product has been included in in the last 3 months"
+      - name: total_order_value_lifetime
+        description: "The total value of all orders the product has been included in"
+      - name: total_order_value_last_12_months
+        description: "The total value of all orders the product has been included in in the last 12 months"
+      - name: total_order_value_last_6_months 
+        description: "The total value of all orders the product has been included in in the last 6 months"
+      - name: total_order_value_last_3_months
+        description: "The total value of all orders the product has been included in in the last 3 months"
+      - name: average_order_value_lifetime
+        description: "The average value of all orders the product has been included in"
+      - name: average_order_value_last_12_months
+        description: "The average value of all orders the product has been included in in the last 12 months"
+      - name: average_order_value_last_6_months
+        description: "The average value of all orders the product has been included in in the last 6 months"
+      - name: average_order_value_last_3_months
+        description: "The average value of all orders the product has been included in in the last 3 months"
+      - name: most_common_payment_method_lifetime
+        description: "The most common payment method the product has been included in"
+      - name: most_common_payment_method_last_12_months
+        description: "The most common payment method the product has been included in in the last 12 months"
+      - name: most_common_payment_method_last_6_months
+        description: "The most common payment method the product has been included in in the last 6 months"
+      - name: most_common_payment_method_last_3_months
+        description: "The most common payment method the product has been included in in the last 3 months"

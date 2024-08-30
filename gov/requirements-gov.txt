@@ -1,0 +1,3 @@
+openmetadata-ingestion[snowflake]
+openmetadata-ingestion[snowflake-usage]
+openmetadata-ingestion[dbt]

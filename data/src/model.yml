@@ -1,0 +1,28 @@
+classes:
+  OrdersSynthData:
+    dependencies:
+      - CustomerSynthData
+      - ProductSynthData
+      - StoreSynthData
+      - CampaignSynthData
+    foreign_keys:
+      cust_id: 
+        object: CustomerSynthData
+        column: cust_id
+      product_id:
+        object: ProductSynthData
+        column: product_id
+      store_id: 
+        object: StoreSynthData
+        column: store_id
+      campaign_id: 
+        object: CampaignSynthData
+        column: campaign_id
+  LoyaltySynthData:
+    dependencies:
+      - CustomerSynthData
+    foreign_keys:
+      cust_id: 
+        object: CustomerSynthData
+        column: cust_id
+  
